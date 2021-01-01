@@ -1,42 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const data = [{
-        id: 1,
-        title: 'Finalize project',
-        order: 1,
-        completed: false,
-        createdOn: new Date()
-    },
-    {
-        id: 2,
-        title: 'Book ticket to London',
-        order: 2,
-        completed: false,
-        createdOn: new Date()
-    },
-    {
-        id: 3,
-        title: 'Finish last article',
-        order: 3,
-        completed: false,
-        createdOn: new Date()
-    },
-    {
-        id: 4,
-        title: 'Get a new t-shirt',
-        order: 4,
-        completed: false,
-        createdOn: new Date()
-    },
-    {
-        id: 5,
-        title: 'Create dinner reservation',
-        order: 5,
-        completed: false,
-        createdOn: new Date()
-    },
-];
+const data = require('../data/data')
 
 router.get('/', function (req, res) {
     res.status(200).json(data);
@@ -62,6 +26,7 @@ router.post('/', function (req, res) {
     let newOrderNum = orderNums.length > 0 ? Math.max.apply(Math, orderNums) + 1 : 1;
 
     let newItem = {
+        name:req.body.name,
         id: newId,
         title: req.body.title,
         order: newOrderNum,
@@ -81,6 +46,7 @@ router.put('/:id', function (req, res) {
 
     if (found) {
         let updated = {
+            name:req.body.name,
             id: found.id,
             title: req.body.title,
             order: req.body.order,
